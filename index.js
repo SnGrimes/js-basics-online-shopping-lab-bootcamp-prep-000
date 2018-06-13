@@ -10,19 +10,60 @@ function setCart(c) {
 }
 
 function addToCart(item) {
- // write your code here
+ let price = Math.floor(Math.random() * (100 - 1)) + 1;
+ cart.push({'itemName': item, 'itemPrice': price});
+ return `${item} has been added to your cart.`;
 }
 
 function viewCart() {
-  // write your code here
+  let contents = 'In your cart, you have ';
+  if(cart.length < 1) {
+    return 'Your shopping cart is empty.';
+  }
+  for(let i = 0; i < cart.length; i++) {
+    contents += `${cart[i].itemName} at $${cart[i].itemPrice}`;
+    if(cart.length == 1 || i == cart.length -1) {
+      break;
+    }
+    if(cart.length == 2 && i !== cart.length -1) {
+      contents += `, and `;
+    }
+    
+    if (cart.length >= 3) {
+       if (i == cart.length - 2) {
+        contents += `, and `;
+      }
+      else {
+        contents += `, `;
+        continue; 
+      }
+    }
+    
+  }
+  contents += `.`;
+  return contents;
 }
 
 function total() {
-  // write your code here
+  let total = 0;
+  for(let i = 0; i < cart.length; i++) {
+    total = total + cart[i].itemPrice;
+  }
+  return total;
 }
 
+
 function removeFromCart(item) {
-  // write your code here
+  for(let i = 0; i < cart.length; i++) {
+   if(cart[i].itemName === item) {
+     cart.splice(i, 1);
+     return cart;
+   }
+   else {
+     return 'That item is not in your cart.';
+   }
+  }
+  
 }
 
 function placeOrder(cardNumber) {
